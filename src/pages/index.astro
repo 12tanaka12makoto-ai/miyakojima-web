@@ -1,11 +1,121 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// 5つの主要プロトコルを定義（ここがテスト項目になります）
+const protocols = [
+	{ id: "clean", title: "住宅・清掃執行", tip: "成約率・高", desc: "都島区内の住居・店舗の物理的メンテナンスをAIが完全代行。" },
+	{ id: "admin", title: "事務・家計OS", tip: "継続率・高", desc: "サブスク・固定費・事務作業をAIがスキャンし、自動最適化。" },
+	{ id: "marketing", title: "地域集客ブースト", tip: "利益率・高", desc: "地元商店のSNS・広告・MEOをAIが24時間運用し客数を最大化。" },
+	{ id: "education", title: "AIリテラシー供給", tip: "需要急増", desc: "経営者・個人向けのAI活用スキルを、伴走型で完全自動レクチャー。" },
+	{ id: "security", title: "地域見守りノード", tip: "信頼性・高", desc: "高齢者・子供の安否、家の防犯をAIがネットワーク越しに監視。" }
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="MIYAKOJIMA AI CORE | Parallel Execution Mode">
+	<main>
+		<div class="cyber-overlay"></div>
+		<div class="spotlight spotlight-left"></div>
+		<div class="spotlight spotlight-right"></div>
+		
+		<section class="hero">
+			<div class="system-meta">
+				<span class="status-chip">PARALLEL_PROCESSING: ON</span>
+				<div class="sync-indicator"><span class="blink"></span>DATA_COLLECTION_IN_PROGRESS</div>
+			</div>
+			
+			<h1 class="core-title">MIYAKOJIMA<span>AI CORE</span></h1>
+			
+			<div class="core-manifesto">
+				<p class="main-command">「全方位、同時執行。」</p>
+				<p class="sub-copy">都島の全ビジネス領域に網を張り、最も反応の良いセクターを自動特定する。戦略的並列PDCAプロトコル稼働中。</p>
+			</div>
+		</section>
+
+		<section class="module-section">
+			<div class="module-grid">
+				{protocols.map((p) => (
+					<div class="module-card" data-id={p.id}>
+						<div class="card-edge"></div>
+						<div class="module-inner">
+							<div class="id-tag">PROTOCOL_ID: {p.id.toUpperCase()}</div>
+							<h2>{p.title}</h2>
+							<p class="spec-text">{p.tip}</p>
+							<p class="module-desc">{p.desc}</p>
+							<button class="execute-btn" data-name={p.title}>プロトコルをテスト</button>
+						</div>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<section class="terminal-area" id="terminal">
+			<div class="terminal-frame">
+				<div class="frame-top">
+					<div class="term-status">MIYAKOJIMA_AI_CORE — REALTIME_RESPONSE_MONITOR</div>
+				</div>
+				<div class="frame-body" id="terminal-output">
+					> 各プロトコルの反応を監視中。ロードするテスト項目を選択してください...
+				</div>
+			</div>
+		</section>
+	</main>
 </Layout>
+
+<style is:global>
+	/* ...前回のスタイルを継承しつつ、カードを少しコンパクトにして並列感を演出... */
+	:root { --bg: #010206; --c-cyan: #00f2ff; --c-magenta: #ff0055; --c-green: #00ffaa; }
+	body { background: var(--bg); color: #fff; font-family: 'Fira Code', monospace; margin: 0; }
+	
+	.cyber-overlay { position: fixed; inset: 0; z-index: -3; background: radial-gradient(circle at 50% 50%, #0a1122 0%, #010206 100%); }
+	.cyber-overlay::before { content: ''; position: absolute; inset: -100%; background-image: linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px); background-size: 40px 40px; transform: perspective(1000px) rotateX(75deg); animation: flow 20s linear infinite; }
+	@keyframes flow { from { background-position: 0 0; } to { background-position: 0 40px; } }
+
+	.spotlight { position: fixed; top: 0; height: 100vh; width: 40vw; z-index: -2; filter: blur(120px); opacity: 0.3; }
+	.spotlight-left { left: -10vw; background: linear-gradient(110deg, var(--c-cyan) 0%, transparent 70%); }
+	.spotlight-right { right: -10vw; background: linear-gradient(-110deg, var(--c-magenta) 0%, transparent 70%); }
+
+	.hero { min-height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+	.core-title { font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; margin: 1rem 0; letter-spacing: -4px; }
+	.core-title span { display: block; -webkit-text-stroke: 1px rgba(255,255,255,0.8); color: transparent; }
+	.main-command { font-size: 1.5rem; color: var(--c-cyan); font-weight: 800; }
+	.sub-copy { font-size: 0.9rem; opacity: 0.6; max-width: 800px; margin: 1rem auto; line-height: 1.6; }
+
+	.module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; padding: 2rem; max-width: 1400px; margin: 0 auto; }
+	.module-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); padding: 2rem; border-radius: 4px; transition: 0.3s; backdrop-filter: blur(10px); }
+	.module-card:hover { border-color: var(--c-cyan); transform: translateY(-5px); background: rgba(0, 242, 255, 0.03); }
+	.id-tag { font-size: 0.6rem; color: var(--c-cyan); letter-spacing: 2px; margin-bottom: 1rem; }
+	.spec-text { color: var(--c-green); font-weight: bold; font-size: 1.1rem; }
+	.module-desc { font-size: 0.85rem; opacity: 0.5; margin: 1rem 0; font-family: 'Inter', sans-serif; }
+	
+	.execute-btn { background: transparent; color: #fff; border: 1px solid #fff; padding: 0.8rem; width: 100%; cursor: pointer; font-weight: bold; transition: 0.3s; }
+	.execute-btn:hover { background: #fff; color: #000; }
+
+	.terminal-area { padding: 4rem 2rem; }
+	.terminal-frame { max-width: 900px; margin: 0 auto; border: 2px solid var(--c-green); background: #000; }
+	.frame-top { background: #111; padding: 10px 20px; font-size: 0.7rem; color: var(--c-green); }
+	.frame-body { padding: 2rem; color: var(--c-green); min-height: 200px; font-size: 1rem; line-height: 1.6; white-space: pre-wrap; }
+
+	.status-chip { border: 1px solid var(--c-cyan); color: var(--c-cyan); font-size: 0.7rem; padding: 3px 12px; }
+	.blink { width: 6px; height: 6px; background: var(--c-green); display: inline-block; border-radius: 50%; animation: pulse 1s infinite; margin-right: 5px; }
+	@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+</style>
+
+<script>
+	const btns = document.querySelectorAll('.execute-btn');
+	const out = document.getElementById('terminal-output');
+	btns.forEach(b => {
+		b.addEventListener('click', () => {
+			const name = b.getAttribute('data-name');
+			if (out) {
+				out.innerHTML = "";
+				let n = 0;
+				const fullTxt = `> TESTING_PROTOCOL: [${name}]\n> STATUS: MONITORING_TRAFFIC...\n> TARGET_AREA: OSAKA_MIYAKOJIMA\n\n[INFO] 本モジュールのLPと広告を都島区限定で配信開始しました。\n[INFO] リアルタイムで反応を計測し、高レスポンスを確認次第、リソースを本プロトコルに集中させます。`;
+				const int = setInterval(() => {
+					out.innerHTML += fullTxt.charAt(n);
+					n++;
+					if (n >= fullTxt.length) clearInterval(int);
+				}, 10);
+				document.getElementById('terminal')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+			}
+		});
+	});
+</script>
